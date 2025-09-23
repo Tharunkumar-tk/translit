@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Languages, Navigation, Download, Accessibility, Camera, Map } from "lucide-react";
+import { Languages, Navigation, Download, Accessibility, Camera, Map, Mic, Globe } from "lucide-react";
 import { Link } from "react-router-dom";
 import heroImage from "@/assets/hero-scripts.jpg";
 
@@ -13,6 +13,18 @@ const Home = () => {
       link: "/transliterate"
     },
     {
+      icon: Camera,
+      title: "AR Camera Mode",
+      description: "Point your camera at text for real-time overlay transliteration with cultural context.",
+      link: "/camera"
+    },
+    {
+      icon: Mic,
+      title: "Voice to Script",
+      description: "Speak in your language and see it written in any Indian script instantly.",
+      link: "/voice"
+    },
+    {
       icon: Navigation,
       title: "Smart Navigation",
       description: "Get directions in your preferred script with location-aware translations.",
@@ -23,6 +35,12 @@ const Home = () => {
       title: "Offline Support",
       description: "Download script packs for seamless use without internet connectivity.",
       link: "/offline"
+    },
+    {
+      icon: Globe,
+      title: "Cultural Context",
+      description: "Discover cultural meanings and significance behind Indian scripts and terms.",
+      link: "/cultural"
     },
     {
       icon: Accessibility,
@@ -54,15 +72,15 @@ const Home = () => {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button asChild variant="default" size="lg">
-              <Link to="/transliterate" className="flex items-center space-x-2">
-                <Languages className="h-5 w-5" />
-                <span>Try Transliteration</span>
+              <Link to="/camera" className="flex items-center space-x-2">
+                <Camera className="h-5 w-5" />
+                <span>Try AR Camera</span>
               </Link>
             </Button>
             <Button asChild variant="secondary" size="lg">
-              <Link to="/navigate" className="flex items-center space-x-2">
-                <Navigation className="h-5 w-5" />
-                <span>Explore Navigation</span>
+              <Link to="/voice" className="flex items-center space-x-2">
+                <Mic className="h-5 w-5" />
+                <span>Voice Mode</span>
               </Link>
             </Button>
           </div>
@@ -81,7 +99,7 @@ const Home = () => {
             </p>
           </div>
           
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             {features.map((feature, index) => {
               const Icon = feature.icon;
               return (

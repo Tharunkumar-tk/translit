@@ -5,6 +5,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Camera, Upload, RotateCcw, Copy, Volume2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { Link } from "react-router-dom";
 
 const Transliterate = () => {
   const [sourceScript, setSourceScript] = useState("hindi");
@@ -109,9 +110,11 @@ const Transliterate = () => {
             <CardTitle className="flex items-center justify-between">
               <span>Script Transliteration</span>
               <div className="flex space-x-2">
-                <Button variant="outline" size="sm">
+                <Button variant="outline" size="sm" asChild>
+                  <Link to="/camera">
                   <Camera className="h-4 w-4 mr-2" />
-                  Camera
+                  Camera Mode
+                  </Link>
                 </Button>
                 <Button variant="outline" size="sm">
                   <Upload className="h-4 w-4 mr-2" />

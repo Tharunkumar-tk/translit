@@ -10,6 +10,10 @@ import Navigate from "./pages/Navigate";
 import Offline from "./pages/Offline";
 import Accessibility from "./pages/Accessibility";
 import About from "./pages/About";
+import CameraMode from "./pages/CameraMode";
+import VoiceMode from "./pages/VoiceMode";
+import CulturalMode from "./pages/CulturalMode";
+import Settings from "./pages/Settings";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -24,9 +28,13 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/transliterate" element={<Transliterate />} />
+            <Route path="/camera" element={<CameraMode />} />
+            <Route path="/voice" element={<VoiceMode />} />
             <Route path="/navigate" element={<Navigate />} />
             <Route path="/offline" element={<Offline />} />
             <Route path="/accessibility" element={<Accessibility />} />
+            <Route path="/cultural" element={<CulturalMode />} />
+            <Route path="/settings" element={<Settings />} />
             <Route path="/about" element={<About />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
