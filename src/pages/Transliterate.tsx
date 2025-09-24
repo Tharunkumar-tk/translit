@@ -17,7 +17,9 @@ import {
   CameraOff, 
   MicOff, 
   Scan,
-  Settings
+  Settings,
+  Upload,
+  Image
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useRef, useEffect } from "react";
@@ -39,8 +41,12 @@ const Transliterate = () => {
   const [arMode, setArMode] = useState(true);
   const [detectedTexts, setDetectedTexts] = useState<any[]>([]);
   const [isCameraProcessing, setIsCameraProcessing] = useState(false);
+  const [uploadedImage, setUploadedImage] = useState<string | null>(null);
+  const [uploadedFileName, setUploadedFileName] = useState<string>("");
+  const [isImageProcessing, setIsImageProcessing] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Voice mode state
   const [isListening, setIsListening] = useState(false);
@@ -194,6 +200,73 @@ const Transliterate = () => {
     });
   };
 
+  const handleImageUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    // Check if file is an image
+    if (!file.type.startsWith('image/')) {
+      toast({
+        title: "Invalid File Type",
+        description: "Please select an image file (JPG, PNG, etc.)",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    setIsImageProcessing(true);
+    
+    // Create image URL for display
+    const imageUrl = URL.createObjectURL(file);
+    setUploadedImage(imageUrl);
+    
+    // Extract filename without extension
+    const fileName = file.name;
+    const nameWithoutExtension = fileName.substring(0, fileName.lastIndexOf('.')) || fileName;
+    setUploadedFileName(nameWithoutExtension);
+    
+    // Simulate processing time
+    await new Promise(resolve => setTimeout(resolve, 2000));
+    
+    // Mock detection results for uploaded image
+    const mockDetections = [
+      {
+        id: 1,
+        original: fileName,
+        transliterated: nameWithoutExtension,
+        x: 150,
+        y: 200,
+        width: 200,
+        height: 40,
+        confidence: 1.0
+      }
+    ];
+    
+    setDetectedTexts(mockDetections);
+    setIsImageProcessing(false);
+    
+    toast({
+      title: "Image Processed",
+      description: `Filename extracted: ${nameWithoutExtension}`
+    });
+  };
+
+  const triggerImageUpload = () => {
+    fileInputRef.current?.click();
+  };
+
+  const clearUploadedImage = () => {
+    if (uploadedImage) {
+      URL.revokeObjectURL(uploadedImage);
+    }
+    setUploadedImage(null);
+    setUploadedFileName("");
+    setDetectedTexts([]);
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
+    }
+  };
+
   // Voice mode functions
   const startListening = () => {
     if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
@@ -316,6 +389,9 @@ const Transliterate = () => {
   useEffect(() => {
     return () => {
       stopCamera();
+      if (uploadedImage) {
+        URL.revokeObjectURL(uploadedImage);
+      }
     };
   }, []);
 
@@ -489,6 +565,44 @@ const Transliterate = () => {
                       )}
                     </div>
 
+                    <div className="text-center">
+                      <div className="text-sm text-muted-foreground mb-2">or</div>
+                      <Button 
+                        onClick={triggerImageUpload} 
+                        variant="outline" 
+                        size="lg" 
+                        className="w-full sm:w-auto"
+                        disabled={isImageProcessing}
+                      >
+                        <Upload className="h-5 w-5 mr-2" />
+                        {isImageProcessing ? "Processing..." : "Upload Image"}
+                      </Button>
+                      <input
+                        ref={fileInputRef}
+                        type="file"
+                        accept="image/*"
+                        onChange={handleImageUpload}
+                        className="hidden"
+                      />
+                    </div>
+
+                    {uploadedImage && (
+                      <div className="space-y-3">
+                        <div className="flex items-center justify-between">
+                          <span className="text-sm font-medium">Uploaded Image</span>
+                          <Button variant="ghost" size="sm" onClick={clearUploadedImage}>
+                            Clear
+                          </Button>
+                        </div>
+                        <div className="bg-muted/50 p-3 rounded-lg">
+                          <div className="flex items-center space-x-2">
+                            <Image className="h-4 w-4 text-muted-foreground" />
+                            <span className="text-sm font-medium">{uploadedFileName}</span>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
                     <div className="space-y-4">
                       <div className="flex items-center justify-between">
                         <label className="text-sm font-medium">Multi-Script Output</label>
@@ -501,15 +615,15 @@ const Transliterate = () => {
                       </div>
                     </div>
 
-                    {isStreaming && (
+                    {(isStreaming || uploadedImage) && (
                       <Button 
                         onClick={captureAndProcess} 
                         variant="accent" 
                         className="w-full"
-                        disabled={isCameraProcessing}
+                        disabled={isCameraProcessing || isImageProcessing}
                       >
                         <Scan className="h-4 w-4 mr-2" />
-                        {isCameraProcessing ? "Processing..." : "Scan Text"}
+                        {(isCameraProcessing || isImageProcessing) ? "Processing..." : uploadedImage ? "Process Image" : "Scan Text"}
                       </Button>
                     )}
                   </CardContent>
@@ -550,24 +664,32 @@ const Transliterate = () => {
                   <CardHeader>
                     <CardTitle className="flex items-center justify-between text-lg md:text-xl">
                       <span>Live Camera Feed</span>
-                      {isStreaming && (
+                      {(isStreaming || uploadedImage) && (
                         <Badge variant="default" className="animate-pulse">
-                          Live
+                          {isStreaming ? "Live" : "Image"}
                         </Badge>
                       )}
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="p-4 md:p-6">
                     <div className="relative aspect-video bg-black rounded-lg overflow-hidden">
-                      {isStreaming ? (
+                      {isStreaming || uploadedImage ? (
                         <>
-                          <video
-                            ref={videoRef}
-                            autoPlay
-                            playsInline
-                            muted
-                            className="w-full h-full object-cover"
-                          />
+                          {isStreaming ? (
+                            <video
+                              ref={videoRef}
+                              autoPlay
+                              playsInline
+                              muted
+                              className="w-full h-full object-cover"
+                            />
+                          ) : uploadedImage ? (
+                            <img
+                              src={uploadedImage}
+                              alt="Uploaded for processing"
+                              className="w-full h-full object-contain"
+                            />
+                          ) : null}
                           
                           {arMode && detectedTexts.map((detection) => (
                             <div
@@ -584,11 +706,11 @@ const Transliterate = () => {
                             </div>
                           ))}
                           
-                          {isCameraProcessing && (
+                          {(isCameraProcessing || isImageProcessing) && (
                             <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
                               <div className="bg-card p-4 rounded-lg text-center">
                                 <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-2"></div>
-                                <p className="text-sm">Processing image...</p>
+                                <p className="text-sm">{isImageProcessing ? "Processing uploaded image..." : "Processing image..."}</p>
                               </div>
                             </div>
                           )}
@@ -598,7 +720,7 @@ const Transliterate = () => {
                           <div className="text-center">
                             <Camera className="h-16 w-16 mx-auto mb-4 opacity-50" />
                             <p className="text-lg">Camera not active</p>
-                            <p className="text-sm">Start camera to begin transliteration</p>
+                            <p className="text-sm">Start camera or upload image to begin transliteration</p>
                           </div>
                         </div>
                       )}
