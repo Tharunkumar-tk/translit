@@ -1,6 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Languages, Navigation, Download, Accessibility, Info, Camera, Mic, Globe, Settings } from "lucide-react";
+import { Languages, Navigation, Download, Accessibility, Info, Globe, Settings } from "lucide-react";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   const location = useLocation();
@@ -8,8 +8,6 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   const navigationItems = [
     { to: "/", label: "Home", icon: Languages },
     { to: "/transliterate", label: "Transliterate", icon: Languages },
-    { to: "/camera", label: "Camera", icon: Camera },
-    { to: "/voice", label: "Voice", icon: Mic },
     { to: "/navigate", label: "Navigate", icon: Navigation },
     { to: "/offline", label: "Offline", icon: Download },
     { to: "/accessibility", label: "Accessibility", icon: Accessibility },

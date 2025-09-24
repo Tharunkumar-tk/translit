@@ -76,7 +76,16 @@ const Navigate = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-card py-8">
+    <div className="min-h-screen py-8 relative">
+      {/* Google Maps Background */}
+      <div 
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20"
+        style={{ 
+          backgroundImage: `url('https://images.pexels.com/photos/2422915/pexels-photo-2422915.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')`
+        }}
+      />
+      <div className="absolute inset-0 bg-background/80" />
+      
       <div className="container mx-auto px-4 max-w-6xl">
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold text-foreground mb-4 lg:text-4xl">
@@ -90,7 +99,7 @@ const Navigate = () => {
         <div className="grid gap-8 lg:grid-cols-3">
           {/* Navigation Form */}
           <div className="lg:col-span-1">
-            <Card className="shadow-card-hover">
+            <Card className="shadow-card-hover relative z-10">
               <CardHeader>
                 <CardTitle className="flex items-center space-x-2">
                   <Navigation className="h-5 w-5" />
@@ -155,7 +164,7 @@ const Navigate = () => {
           {/* Map and Route Instructions */}
           <div className="lg:col-span-2 space-y-6">
             {/* Map Simulation */}
-            <Card className="shadow-card-hover">
+            <Card className="shadow-card-hover relative z-10">
               <CardHeader>
                 <CardTitle className="flex items-center space-x-2">
                   <Route className="h-5 w-5" />
@@ -163,11 +172,17 @@ const Navigate = () => {
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="aspect-video bg-gradient-to-br from-accent/20 to-primary/20 rounded-lg flex items-center justify-center border-2 border-dashed border-muted-foreground/30">
+                <div 
+                  className="aspect-video rounded-lg flex items-center justify-center border-2 border-dashed border-muted-foreground/30 bg-cover bg-center relative"
+                  style={{ 
+                    backgroundImage: `url('https://images.pexels.com/photos/2422915/pexels-photo-2422915.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')`
+                  }}
+                >
+                  <div className="absolute inset-0 bg-black/40 rounded-lg"></div>
                   <div className="text-center">
-                    <MapPin className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-                    <p className="text-lg font-medium text-muted-foreground">Interactive Map</p>
-                    <p className="text-sm text-muted-foreground">Route will be displayed here</p>
+                    <MapPin className="h-12 w-12 text-white mx-auto mb-4 relative z-10" />
+                    <p className="text-lg font-medium text-white relative z-10">Interactive Map</p>
+                    <p className="text-sm text-white/80 relative z-10">Route will be displayed here</p>
                   </div>
                 </div>
               </CardContent>
@@ -175,7 +190,7 @@ const Navigate = () => {
 
             {/* Route Instructions */}
             {routeInstructions.length > 0 && (
-              <Card className="shadow-card-hover">
+              <Card className="shadow-card-hover relative z-10">
                 <CardHeader>
                   <CardTitle className="flex items-center justify-between">
                     <span className="flex items-center space-x-2">
