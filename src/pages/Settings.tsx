@@ -76,19 +76,19 @@ const Settings = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-card py-8">
+    <div className="min-h-screen bg-gradient-card py-4 md:py-8">
       <div className="container mx-auto px-4 max-w-4xl">
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-foreground mb-4 lg:text-4xl">
+        <div className="text-center mb-6 md:mb-8">
+          <h1 className="text-2xl md:text-3xl font-bold text-foreground mb-4 lg:text-4xl">
             Settings & Preferences
           </h1>
-          <p className="text-lg text-muted-foreground">
+          <p className="text-base md:text-lg text-muted-foreground px-4">
             Customize TransLIT to match your preferences and needs
           </p>
         </div>
 
         <Tabs defaultValue="general" className="w-full">
-          <TabsList className="grid w-full grid-cols-4">
+          <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 h-auto">
             <TabsTrigger value="general">General</TabsTrigger>
             <TabsTrigger value="accessibility">Accessibility</TabsTrigger>
             <TabsTrigger value="camera">Camera</TabsTrigger>
@@ -98,12 +98,12 @@ const Settings = () => {
           <TabsContent value="general" className="space-y-6">
             <Card className="shadow-card-hover">
               <CardHeader>
-                <CardTitle className="flex items-center space-x-2">
+                <CardTitle className="flex items-center space-x-2 text-lg md:text-xl">
                   <SettingsIcon className="h-5 w-5" />
                   <span>General Preferences</span>
                 </CardTitle>
               </CardHeader>
-              <CardContent className="space-y-6">
+              <CardContent className="p-4 md:p-6 space-y-6">
                 <div>
                   <label className="block text-sm font-medium mb-2">Default Familiar Script</label>
                   <Select value={defaultScript} onValueChange={setDefaultScript}>
@@ -126,7 +126,7 @@ const Settings = () => {
                   </p>
                 </div>
 
-                <div className="flex items-center justify-between">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                   <div>
                     <label className="text-sm font-medium">Auto-Transliterate</label>
                     <p className="text-xs text-muted-foreground">
@@ -136,7 +136,7 @@ const Settings = () => {
                   <Switch checked={autoTransliterate} onCheckedChange={setAutoTransliterate} />
                 </div>
 
-                <div className="flex items-center justify-between">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                   <div>
                     <label className="text-sm font-medium">Offline Mode</label>
                     <p className="text-xs text-muted-foreground">
@@ -152,13 +152,13 @@ const Settings = () => {
           <TabsContent value="accessibility" className="space-y-6">
             <Card className="shadow-card-hover">
               <CardHeader>
-                <CardTitle className="flex items-center space-x-2">
+                <CardTitle className="flex items-center space-x-2 text-lg md:text-xl">
                   <Eye className="h-5 w-5" />
                   <span>Accessibility Options</span>
                 </CardTitle>
               </CardHeader>
-              <CardContent className="space-y-6">
-                <div className="flex items-center justify-between">
+              <CardContent className="p-4 md:p-6 space-y-6">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                   <div>
                     <label className="text-sm font-medium">Voice Assistance</label>
                     <p className="text-xs text-muted-foreground">
@@ -197,7 +197,7 @@ const Settings = () => {
                   />
                 </div>
 
-                <div className="flex items-center justify-between">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                   <div>
                     <label className="text-sm font-medium">High Contrast Mode</label>
                     <p className="text-xs text-muted-foreground">
@@ -213,12 +213,12 @@ const Settings = () => {
           <TabsContent value="camera" className="space-y-6">
             <Card className="shadow-card-hover">
               <CardHeader>
-                <CardTitle className="flex items-center space-x-2">
+                <CardTitle className="flex items-center space-x-2 text-lg md:text-xl">
                   <SettingsIcon className="h-5 w-5" />
                   <span>Camera Settings</span>
                 </CardTitle>
               </CardHeader>
-              <CardContent className="space-y-6">
+              <CardContent className="p-4 md:p-6 space-y-6">
                 <div>
                   <label className="block text-sm font-medium mb-2">Camera Quality</label>
                   <Select value={cameraQuality} onValueChange={setCameraQuality}>
@@ -238,7 +238,7 @@ const Settings = () => {
 
                 <div className="bg-muted/50 p-4 rounded-lg">
                   <h4 className="font-medium mb-2">Camera Tips</h4>
-                  <div className="space-y-1 text-sm text-muted-foreground">
+                  <div className="space-y-1 text-xs md:text-sm text-muted-foreground">
                     <p>• Hold device steady for 2-3 seconds</p>
                     <p>• Ensure good lighting conditions</p>
                     <p>• Keep text parallel to camera</p>
@@ -252,13 +252,13 @@ const Settings = () => {
           <TabsContent value="cultural" className="space-y-6">
             <Card className="shadow-card-hover">
               <CardHeader>
-                <CardTitle className="flex items-center space-x-2">
+                <CardTitle className="flex items-center space-x-2 text-lg md:text-xl">
                   <Globe className="h-5 w-5" />
                   <span>Cultural Features</span>
                 </CardTitle>
               </CardHeader>
-              <CardContent className="space-y-6">
-                <div className="flex items-center justify-between">
+              <CardContent className="p-4 md:p-6 space-y-6">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                   <div>
                     <label className="text-sm font-medium">Cultural Notes</label>
                     <p className="text-xs text-muted-foreground">
@@ -270,7 +270,7 @@ const Settings = () => {
 
                 <div className="bg-primary/5 p-4 rounded-lg border border-primary/20">
                   <h4 className="font-medium mb-2 text-primary">Cultural Sensitivity</h4>
-                  <p className="text-sm text-muted-foreground">
+                  <p className="text-xs md:text-sm text-muted-foreground">
                     TransLIT respects the cultural significance of Indian languages and scripts. 
                     Cultural notes help visitors understand the deeper meaning behind terms and show 
                     appropriate respect at religious and heritage sites.
@@ -279,7 +279,7 @@ const Settings = () => {
 
                 <div>
                   <h4 className="font-medium mb-3">Supported Cultural Contexts</h4>
-                  <div className="grid gap-2">
+                  <div className="grid gap-2 grid-cols-1 sm:grid-cols-2">
                     <Badge variant="outline">🕉️ Temple Architecture</Badge>
                     <Badge variant="outline">🏛️ Heritage Monuments</Badge>
                     <Badge variant="outline">🎭 Festival Terms</Badge>
@@ -293,11 +293,11 @@ const Settings = () => {
         </Tabs>
 
         {/* Action Buttons */}
-        <div className="flex justify-center space-x-4 mt-8">
-          <Button onClick={saveSettings} variant="default" size="lg">
+        <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 mt-6 md:mt-8">
+          <Button onClick={saveSettings} variant="default" size="lg" className="w-full sm:w-auto">
             Save Settings
           </Button>
-          <Button onClick={resetSettings} variant="outline" size="lg">
+          <Button onClick={resetSettings} variant="outline" size="lg" className="w-full sm:w-auto">
             Reset to Defaults
           </Button>
         </div>
