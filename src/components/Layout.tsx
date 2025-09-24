@@ -2,7 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Languages, Navigation, Download, Accessibility, Info, Globe, Settings, Menu, X } from "lucide-react";
 import { useState } from "react";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   const location = useLocation();
@@ -57,14 +57,14 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
               </Button>
             </SheetTrigger>
             <SheetContent side="right" className="w-[280px] sm:w-[350px]">
-              <div className="flex items-center justify-between mb-6">
+              <SheetHeader className="flex-row items-center justify-between mb-6">
                 <div className="flex items-center space-x-2">
                   <div className="rounded-lg bg-primary p-1.5">
                     <Languages className="h-5 w-5 text-primary-foreground" />
                   </div>
-                  <span className="text-lg font-bold">TransLIT</span>
+                  <SheetTitle className="text-lg font-bold">TransLIT</SheetTitle>
                 </div>
-              </div>
+              </SheetHeader>
               
               <nav className="flex flex-col space-y-2">
                 {navigationItems.map(({ to, label, icon: Icon }) => (
