@@ -175,7 +175,7 @@ const Navigate = () => {
                 <div 
                   className="aspect-video rounded-lg flex items-center justify-center border-2 border-dashed border-muted-foreground/30 bg-cover bg-center relative"
                   style={{ 
-                    backgroundImage: `url('https://images.pexels.com/photos/2422915/pexels-photo-2422915.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')`
+                    backgroundImage: `url('/src/assets/Screenshot 2025-09-24 061912.png')`
                   }}
                 >
                   <div className="absolute inset-0 bg-black/40 rounded-lg"></div>
