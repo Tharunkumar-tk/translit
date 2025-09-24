@@ -76,7 +76,7 @@ const Navigate = () => {
   };
 
   return (
-    <div className="min-h-screen py-8 relative">
+    <div className="min-h-screen py-4 md:py-8 relative">
       {/* Google Maps Background */}
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20"
@@ -87,26 +87,26 @@ const Navigate = () => {
       <div className="absolute inset-0 bg-background/80" />
       
       <div className="container mx-auto px-4 max-w-6xl">
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-foreground mb-4 lg:text-4xl">
+        <div className="text-center mb-6 md:mb-8">
+          <h1 className="text-2xl md:text-3xl font-bold text-foreground mb-4 lg:text-4xl">
             Smart Navigation
           </h1>
-          <p className="text-lg text-muted-foreground">
+          <p className="text-base md:text-lg text-muted-foreground px-4">
             Get directions in your preferred script with location-aware translations
           </p>
         </div>
 
-        <div className="grid gap-8 lg:grid-cols-3">
+        <div className="grid gap-6 md:gap-8 xl:grid-cols-3">
           {/* Navigation Form */}
-          <div className="lg:col-span-1">
+          <div className="xl:col-span-1">
             <Card className="shadow-card-hover relative z-10">
               <CardHeader>
-                <CardTitle className="flex items-center space-x-2">
+                <CardTitle className="flex items-center space-x-2 text-lg md:text-xl">
                   <Navigation className="h-5 w-5" />
                   <span>Route Planning</span>
                 </CardTitle>
               </CardHeader>
-              <CardContent className="space-y-6">
+              <CardContent className="p-4 md:p-6 space-y-6">
                 <div>
                   <label className="block text-sm font-medium mb-2">From</label>
                   <div className="relative">
@@ -152,7 +152,7 @@ const Navigate = () => {
                 <Button
                   onClick={handleStartNavigation}
                   variant="default"
-                  className="w-full"
+                  className="w-full" 
                   disabled={isNavigating}
                 >
                   {isNavigating ? "Calculating Route..." : "Start Navigation"}
@@ -162,27 +162,27 @@ const Navigate = () => {
           </div>
 
           {/* Map and Route Instructions */}
-          <div className="lg:col-span-2 space-y-6">
+          <div className="xl:col-span-2 space-y-6">
             {/* Map Simulation */}
             <Card className="shadow-card-hover relative z-10">
               <CardHeader>
-                <CardTitle className="flex items-center space-x-2">
+                <CardTitle className="flex items-center space-x-2 text-lg md:text-xl">
                   <Route className="h-5 w-5" />
                   <span>Route Map</span>
                 </CardTitle>
               </CardHeader>
-              <CardContent>
+              <CardContent className="p-4 md:p-6">
                 <div 
-                  className="aspect-video rounded-lg flex items-center justify-center border-2 border-dashed border-muted-foreground/30 bg-cover bg-center relative"
+                  className="aspect-video rounded-lg flex items-center justify-center border-2 border-dashed border-muted-foreground/30 bg-cover bg-center relative overflow-hidden"
                   style={{ 
                     backgroundImage: `url('/src/assets/Screenshot 2025-09-24 061912.png')`
                   }}
                 >
                   <div className="absolute inset-0 bg-black/40 rounded-lg"></div>
                   <div className="text-center">
-                    <MapPin className="h-12 w-12 text-white mx-auto mb-4 relative z-10" />
-                    <p className="text-lg font-medium text-white relative z-10">Interactive Map</p>
-                    <p className="text-sm text-white/80 relative z-10">Route will be displayed here</p>
+                    <MapPin className="h-8 w-8 md:h-12 md:w-12 text-white mx-auto mb-2 md:mb-4 relative z-10" />
+                    <p className="text-base md:text-lg font-medium text-white relative z-10">Interactive Map</p>
+                    <p className="text-xs md:text-sm text-white/80 relative z-10">Route will be displayed here</p>
                   </div>
                 </div>
               </CardContent>
@@ -192,12 +192,12 @@ const Navigate = () => {
             {routeInstructions.length > 0 && (
               <Card className="shadow-card-hover relative z-10">
                 <CardHeader>
-                  <CardTitle className="flex items-center justify-between">
+                  <CardTitle className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                     <span className="flex items-center space-x-2">
                       <Navigation className="h-5 w-5" />
                       <span>Route Instructions</span>
                     </span>
-                    <div className="flex items-center space-x-4 text-sm text-muted-foreground">
+                    <div className="flex items-center space-x-3 md:space-x-4 text-xs md:text-sm text-muted-foreground">
                       <div className="flex items-center space-x-1">
                         <Clock className="h-4 w-4" />
                         <span>~15 min</span>
@@ -209,16 +209,16 @@ const Navigate = () => {
                     </div>
                   </CardTitle>
                 </CardHeader>
-                <CardContent>
+                <CardContent className="p-4 md:p-6">
                   <div className="space-y-3">
                     {routeInstructions.map((instruction) => (
-                      <div key={instruction.id} className="flex items-start space-x-3 p-3 bg-muted/50 rounded-lg">
+                      <div key={instruction.id} className="flex items-start space-x-3 p-3 md:p-4 bg-muted/50 rounded-lg">
                         <div className="flex-shrink-0 w-6 h-6 bg-primary text-primary-foreground rounded-full flex items-center justify-center text-xs font-bold">
                           {instruction.id}
                         </div>
                         <div className="flex-1">
-                          <p className="text-sm font-medium">{instruction.instruction}</p>
-                          <div className="flex space-x-4 mt-1 text-xs text-muted-foreground">
+                          <p className="text-sm md:text-base font-medium">{instruction.instruction}</p>
+                          <div className="flex space-x-3 md:space-x-4 mt-1 text-xs text-muted-foreground">
                             <span>{instruction.distance}</span>
                             <span>{instruction.time}</span>
                           </div>

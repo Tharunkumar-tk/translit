@@ -86,34 +86,34 @@ const Accessibility = () => {
   ];
 
   return (
-    <div className={`min-h-screen py-8 ${highContrast ? 'bg-black text-white' : 'bg-gradient-card'}`}>
+    <div className={`min-h-screen py-4 md:py-8 ${highContrast ? 'bg-black text-white' : 'bg-gradient-card'}`}>
       <div className="container mx-auto px-4 max-w-4xl">
-        <div className="text-center mb-8">
+        <div className="text-center mb-6 md:mb-8">
           <h1 className={`text-3xl font-bold mb-4 lg:text-4xl ${
-            largeText ? 'text-4xl lg:text-5xl' : ''
+            largeText ? 'text-3xl md:text-4xl lg:text-5xl' : 'text-2xl md:text-3xl'
           } ${highContrast ? 'text-white' : 'text-foreground'}`}>
             Accessibility Features
           </h1>
           <p className={`text-lg ${
-            largeText ? 'text-xl' : ''
+            largeText ? 'text-lg md:text-xl' : 'text-base md:text-lg'
           } ${highContrast ? 'text-gray-200' : 'text-muted-foreground'}`}>
             Inclusive design ensuring TransLIT works for everyone
           </p>
         </div>
 
         {/* Quick Settings Panel */}
-        <Card className={`mb-8 ${highContrast ? 'bg-gray-900 border-white' : ''}`}>
+        <Card className={`mb-6 md:mb-8 ${highContrast ? 'bg-gray-900 border-white' : ''}`}>
           <CardHeader>
-            <CardTitle className={`flex items-center space-x-2 ${
+            <CardTitle className={`flex items-center space-x-2 text-lg md:text-xl ${
               highContrast ? 'text-white' : ''
             }`}>
               <AccessibilityIcon className="h-6 w-6" />
               <span>Quick Accessibility Settings</span>
             </CardTitle>
           </CardHeader>
-          <CardContent className="space-y-6">
+          <CardContent className="p-4 md:p-6 space-y-6">
             {/* Voice Controls */}
-            <div className="grid gap-4 md:grid-cols-2">
+            <div className="grid gap-4 sm:grid-cols-2">
               <div>
                 <label className={`block text-sm font-medium mb-2 ${
                   highContrast ? 'text-white' : ''
@@ -164,16 +164,16 @@ const Accessibility = () => {
         </Card>
 
         {/* Feature Toggles */}
-        <div className="grid gap-6 mb-8">
+        <div className="grid gap-4 md:gap-6 mb-6 md:mb-8">
           {features.map((feature, index) => {
             const Icon = feature.icon;
             return (
               <Card key={index} className={`${
                 highContrast ? 'bg-gray-900 border-white' : 'hover:shadow-card-hover'
               } transition-all duration-300`}>
-                <CardContent className="p-6">
+                <CardContent className="p-4 md:p-6">
                   <div className="flex items-center justify-between">
-                    <div className="flex items-start space-x-4">
+                    <div className="flex items-start space-x-3 md:space-x-4 flex-1">
                       <div className={`rounded-lg p-3 ${
                         highContrast 
                           ? 'bg-white text-black' 
@@ -185,11 +185,13 @@ const Accessibility = () => {
                       </div>
                       <div>
                         <h3 className={`text-lg font-semibold ${
+                        <h3 className={`text-base md:text-lg font-semibold ${
                           highContrast ? 'text-white' : 'text-foreground'
                         }`}>
                           {feature.title}
                         </h3>
                         <p className={`text-sm ${
+                        <p className={`text-xs md:text-sm ${
                           highContrast ? 'text-gray-200' : 'text-muted-foreground'
                         } ${largeText ? 'text-base' : ''}`}>
                           {feature.description}
@@ -210,23 +212,23 @@ const Accessibility = () => {
         {/* Demonstration Section */}
         <Card className={highContrast ? 'bg-gray-900 border-white' : ''}>
           <CardHeader>
-            <CardTitle className={highContrast ? 'text-white' : ''}>
+            <CardTitle className={`text-lg md:text-xl ${highContrast ? 'text-white' : ''}`}>
               Accessibility in Action
             </CardTitle>
           </CardHeader>
-          <CardContent className="space-y-6">
+          <CardContent className="p-4 md:p-6 space-y-6">
             {/* Sample transliteration with accessibility features */}
-            <div className="grid gap-4 md:grid-cols-2">
+            <div className="grid gap-4 sm:grid-cols-2">
               <div className={`p-4 rounded-lg border ${
                 highContrast ? 'border-white bg-black' : 'bg-muted/50'
               }`}>
                 <h4 className={`font-medium mb-2 ${
-                  largeText ? 'text-lg' : 'text-sm'
+                  largeText ? 'text-base md:text-lg' : 'text-sm'
                 } ${highContrast ? 'text-white' : ''}`}>
                   Original Text
                 </h4>
                 <p className={`${
-                  largeText ? 'text-xl' : 'text-lg'
+                  largeText ? 'text-lg md:text-xl' : 'text-base md:text-lg'
                 } ${highContrast ? 'text-white font-bold' : ''}`}
                 style={{ fontSize: `${textSize[0]}px` }}>
                   रेलवे स्टेशन कहाँ है?
@@ -238,7 +240,7 @@ const Accessibility = () => {
               }`}>
                 <div className="flex items-center justify-between mb-2">
                   <h4 className={`font-medium ${
-                    largeText ? 'text-lg' : 'text-sm'
+                    largeText ? 'text-base md:text-lg' : 'text-sm'
                   } ${highContrast ? 'text-white' : ''}`}>
                     Transliterated
                   </h4>
@@ -253,7 +255,7 @@ const Accessibility = () => {
                   </Button>
                 </div>
                 <p className={`${
-                  largeText ? 'text-xl' : 'text-lg'
+                  largeText ? 'text-lg md:text-xl' : 'text-base md:text-lg'
                 } ${highContrast ? 'text-white font-bold' : ''}`}
                 style={{ fontSize: `${textSize[0]}px` }}>
                   Railway station kahan hai?
@@ -266,11 +268,11 @@ const Accessibility = () => {
               highContrast ? 'border-white bg-gray-800' : 'bg-muted/30'
             }`}>
               <h4 className={`font-medium mb-3 ${
-                largeText ? 'text-lg' : 'text-sm'
+                largeText ? 'text-base md:text-lg' : 'text-sm'
               } ${highContrast ? 'text-white' : ''}`}>
                 Keyboard Shortcuts
               </h4>
-              <div className="grid gap-2 md:grid-cols-2 text-sm">
+              <div className="grid gap-2 sm:grid-cols-2 text-xs md:text-sm">
                 <div className={`flex justify-between ${
                   highContrast ? 'text-gray-200' : 'text-muted-foreground'
                 }`}>

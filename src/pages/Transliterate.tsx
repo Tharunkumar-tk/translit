@@ -320,27 +320,27 @@ const Transliterate = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-card py-8">
+    <div className="min-h-screen bg-gradient-card py-4 md:py-8">
       <div className="container mx-auto px-4 max-w-6xl">
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-foreground mb-4 lg:text-4xl">
+        <div className="text-center mb-6 md:mb-8">
+          <h1 className="text-2xl md:text-3xl font-bold text-foreground mb-4 lg:text-4xl">
             TransLIT - All Modes
           </h1>
-          <p className="text-lg text-muted-foreground">
+          <p className="text-base md:text-lg text-muted-foreground px-4">
             Text, Camera, and Voice transliteration in one unified interface
           </p>
         </div>
 
         {/* Global Script Selection */}
-        <Card className="mb-8 shadow-card-hover">
+        <Card className="mb-6 md:mb-8 shadow-card-hover">
           <CardHeader>
-            <CardTitle className="flex items-center space-x-2">
+            <CardTitle className="flex items-center space-x-2 text-lg md:text-xl">
               <Settings className="h-5 w-5" />
               <span>Script Settings</span>
             </CardTitle>
           </CardHeader>
-          <CardContent>
-            <div className="grid gap-4 md:grid-cols-3 items-center">
+          <CardContent className="p-4 md:p-6">
+            <div className="grid gap-4 items-center">
               <div>
                 <label className="block text-sm font-medium mb-2">From</label>
                 <Select value={sourceScript} onValueChange={setSourceScript}>
@@ -360,7 +360,7 @@ const Transliterate = () => {
                 </Select>
               </div>
               
-              <div className="flex justify-center">
+              <div className="flex justify-center md:order-2">
                 <Button
                   variant="ghost"
                   size="sm"
@@ -395,18 +395,18 @@ const Transliterate = () => {
 
         {/* Mode Tabs */}
         <Tabs defaultValue="text" className="w-full">
-          <TabsList className="grid w-full grid-cols-3">
+          <TabsList className="grid w-full grid-cols-3 h-auto">
             <TabsTrigger value="text" className="flex items-center space-x-2">
               <Languages className="h-4 w-4" />
-              <span>Text</span>
+              <span className="hidden sm:inline">Text</span>
             </TabsTrigger>
             <TabsTrigger value="camera" className="flex items-center space-x-2">
               <Camera className="h-4 w-4" />
-              <span>Camera</span>
+              <span className="hidden sm:inline">Camera</span>
             </TabsTrigger>
             <TabsTrigger value="voice" className="flex items-center space-x-2">
               <Mic className="h-4 w-4" />
-              <span>Voice</span>
+              <span className="hidden sm:inline">Voice</span>
             </TabsTrigger>
           </TabsList>
 
@@ -414,17 +414,17 @@ const Transliterate = () => {
           <TabsContent value="text" className="space-y-6">
             <Card className="shadow-card-hover">
               <CardHeader>
-                <CardTitle>Text Transliteration</CardTitle>
+                <CardTitle className="text-lg md:text-xl">Text Transliteration</CardTitle>
               </CardHeader>
-              <CardContent className="space-y-6">
-                <div className="grid gap-4 md:grid-cols-2">
+              <CardContent className="p-4 md:p-6 space-y-6">
+                <div className="grid gap-4 lg:grid-cols-2">
                   <div>
                     <label className="block text-sm font-medium mb-2">Input Text</label>
                     <Textarea
                       placeholder="Enter text to transliterate..."
                       value={inputText}
                       onChange={(e) => setInputText(e.target.value)}
-                      className="min-h-[200px] text-lg"
+                      className="min-h-[150px] md:min-h-[200px] text-base md:text-lg"
                     />
                   </div>
                   
@@ -446,7 +446,7 @@ const Transliterate = () => {
                       placeholder="Transliterated text will appear here..."
                       value={outputText}
                       readOnly
-                      className="min-h-[200px] text-lg bg-muted"
+                      className="min-h-[150px] md:min-h-[200px] text-base md:text-lg bg-muted"
                     />
                   </div>
                 </div>
@@ -468,21 +468,21 @@ const Transliterate = () => {
 
           {/* Camera Mode */}
           <TabsContent value="camera" className="space-y-6">
-            <div className="grid gap-6 lg:grid-cols-3">
-              <div className="lg:col-span-1">
+            <div className="grid gap-6 xl:grid-cols-3">
+              <div className="xl:col-span-1">
                 <Card className="shadow-card-hover">
                   <CardHeader>
-                    <CardTitle>Camera Controls</CardTitle>
+                    <CardTitle className="text-lg md:text-xl">Camera Controls</CardTitle>
                   </CardHeader>
-                  <CardContent className="space-y-6">
+                  <CardContent className="p-4 md:p-6 space-y-6">
                     <div className="flex justify-center">
                       {!isStreaming ? (
-                        <Button onClick={startCamera} variant="default" size="lg">
+                        <Button onClick={startCamera} variant="default" size="lg" className="w-full sm:w-auto">
                           <Camera className="h-5 w-5 mr-2" />
                           Start Camera
                         </Button>
                       ) : (
-                        <Button onClick={stopCamera} variant="destructive" size="lg">
+                        <Button onClick={stopCamera} variant="destructive" size="lg" className="w-full sm:w-auto">
                           <CameraOff className="h-5 w-5 mr-2" />
                           Stop Camera
                         </Button>
@@ -518,9 +518,9 @@ const Transliterate = () => {
                 {multiScript && detectedTexts.length > 0 && (
                   <Card className="mt-6 shadow-card-hover">
                     <CardHeader>
-                      <CardTitle>Multi-Script Output</CardTitle>
+                      <CardTitle className="text-lg md:text-xl">Multi-Script Output</CardTitle>
                     </CardHeader>
-                    <CardContent>
+                    <CardContent className="p-4 md:p-6">
                       <div className="space-y-3">
                         {multiScriptOutputs.map((output, index) => (
                           <div key={index} className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
@@ -545,10 +545,10 @@ const Transliterate = () => {
                 )}
               </div>
 
-              <div className="lg:col-span-2">
+              <div className="xl:col-span-2">
                 <Card className="shadow-card-hover">
                   <CardHeader>
-                    <CardTitle className="flex items-center justify-between">
+                    <CardTitle className="flex items-center justify-between text-lg md:text-xl">
                       <span>Live Camera Feed</span>
                       {isStreaming && (
                         <Badge variant="default" className="animate-pulse">
@@ -557,7 +557,7 @@ const Transliterate = () => {
                       )}
                     </CardTitle>
                   </CardHeader>
-                  <CardContent>
+                  <CardContent className="p-4 md:p-6">
                     <div className="relative aspect-video bg-black rounded-lg overflow-hidden">
                       {isStreaming ? (
                         <>
@@ -611,12 +611,12 @@ const Transliterate = () => {
                 {!arMode && detectedTexts.length > 0 && (
                   <Card className="mt-6 shadow-card-hover">
                     <CardHeader>
-                      <CardTitle>Detected Text</CardTitle>
+                      <CardTitle className="text-lg md:text-xl">Detected Text</CardTitle>
                     </CardHeader>
-                    <CardContent>
+                    <CardContent className="p-4 md:p-6">
                       <div className="space-y-3">
                         {detectedTexts.map((detection) => (
-                          <div key={detection.id} className="p-4 border rounded-lg">
+                          <div key={detection.id} className="p-3 md:p-4 border rounded-lg">
                             <div className="flex items-center justify-between mb-2">
                               <Badge variant="outline">
                                 Confidence: {(detection.confidence * 100).toFixed(0)}%
@@ -632,11 +632,11 @@ const Transliterate = () => {
                             <div className="grid gap-2">
                               <div>
                                 <span className="text-sm text-muted-foreground">Original:</span>
-                                <p className="font-medium text-lg">{detection.original}</p>
+                                <p className="font-medium text-base md:text-lg">{detection.original}</p>
                               </div>
                               <div>
                                 <span className="text-sm text-muted-foreground">Transliterated:</span>
-                                <p className="font-medium text-lg text-primary">{detection.transliterated}</p>
+                                <p className="font-medium text-base md:text-lg text-primary">{detection.transliterated}</p>
                               </div>
                             </div>
                           </div>
@@ -651,21 +651,21 @@ const Transliterate = () => {
 
           {/* Voice Mode */}
           <TabsContent value="voice" className="space-y-6">
-            <div className="grid gap-6 lg:grid-cols-3">
-              <div className="lg:col-span-1">
+            <div className="grid gap-6 xl:grid-cols-3">
+              <div className="xl:col-span-1">
                 <Card className="shadow-card-hover">
                   <CardHeader>
-                    <CardTitle>Voice Controls</CardTitle>
+                    <CardTitle className="text-lg md:text-xl">Voice Controls</CardTitle>
                   </CardHeader>
-                  <CardContent className="space-y-6">
+                  <CardContent className="p-4 md:p-6 space-y-6">
                     <div className="flex justify-center">
                       {!isListening ? (
-                        <Button onClick={startListening} variant="default" size="lg" className="rounded-full w-20 h-20">
-                          <Mic className="h-8 w-8" />
+                        <Button onClick={startListening} variant="default" size="lg" className="rounded-full w-16 h-16 md:w-20 md:h-20">
+                          <Mic className="h-6 w-6 md:h-8 md:w-8" />
                         </Button>
                       ) : (
-                        <Button onClick={stopListening} variant="destructive" size="lg" className="rounded-full w-20 h-20 animate-pulse">
-                          <MicOff className="h-8 w-8" />
+                        <Button onClick={stopListening} variant="destructive" size="lg" className="rounded-full w-16 h-16 md:w-20 md:h-20 animate-pulse">
+                          <MicOff className="h-6 w-6 md:h-8 md:w-8" />
                         </Button>
                       )}
                     </div>
@@ -694,10 +694,10 @@ const Transliterate = () => {
                 </Card>
               </div>
 
-              <div className="lg:col-span-2 space-y-6">
+              <div className="xl:col-span-2 space-y-6">
                 <Card className="shadow-card-hover">
                   <CardHeader>
-                    <CardTitle className="flex items-center justify-between">
+                    <CardTitle className="flex items-center justify-between text-lg md:text-xl">
                       <span>What You Said</span>
                       {confidence > 0 && (
                         <Badge variant="outline">
@@ -706,12 +706,12 @@ const Transliterate = () => {
                       )}
                     </CardTitle>
                   </CardHeader>
-                  <CardContent>
+                  <CardContent className="p-4 md:p-6">
                     <div className="min-h-[100px] p-4 bg-muted/50 rounded-lg">
                       {spokenText ? (
-                        <p className="text-lg">{spokenText}</p>
+                        <p className="text-base md:text-lg">{spokenText}</p>
                       ) : (
-                        <p className="text-muted-foreground italic">
+                        <p className="text-sm md:text-base text-muted-foreground italic">
                           Your spoken words will appear here...
                         </p>
                       )}
@@ -721,7 +721,7 @@ const Transliterate = () => {
 
                 <Card className="shadow-card-hover">
                   <CardHeader>
-                    <CardTitle className="flex items-center justify-between">
+                    <CardTitle className="flex items-center justify-between text-lg md:text-xl">
                       <span>Script Output</span>
                       {transliteratedText && (
                         <div className="flex space-x-2">
@@ -735,17 +735,17 @@ const Transliterate = () => {
                       )}
                     </CardTitle>
                   </CardHeader>
-                  <CardContent>
+                  <CardContent className="p-4 md:p-6">
                     <div className="min-h-[100px] p-4 bg-primary/5 border border-primary/20 rounded-lg">
                       {isVoiceProcessing ? (
                         <div className="flex items-center justify-center h-full">
                           <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-primary mr-3"></div>
-                          <span className="text-muted-foreground">Converting to script...</span>
+                          <span className="text-sm md:text-base text-muted-foreground">Converting to script...</span>
                         </div>
                       ) : transliteratedText ? (
-                        <p className="text-lg font-medium text-primary">{transliteratedText}</p>
+                        <p className="text-base md:text-lg font-medium text-primary">{transliteratedText}</p>
                       ) : (
-                        <p className="text-muted-foreground italic">
+                        <p className="text-sm md:text-base text-muted-foreground italic">
                           Transliterated text will appear here...
                         </p>
                       )}

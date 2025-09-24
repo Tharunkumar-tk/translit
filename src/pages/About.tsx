@@ -81,25 +81,25 @@ const About = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-card py-8">
+    <div className="min-h-screen bg-gradient-card py-4 md:py-8">
       <div className="container mx-auto px-4 max-w-6xl">
         {/* Hero Section */}
-        <div className="text-center mb-12">
-          <h1 className="text-3xl font-bold text-foreground mb-4 lg:text-4xl">
+        <div className="text-center mb-8 md:mb-12">
+          <h1 className="text-2xl md:text-3xl font-bold text-foreground mb-4 lg:text-4xl">
             About TransLIT
           </h1>
-          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+          <p className="text-base md:text-lg text-muted-foreground max-w-3xl mx-auto px-4">
             Breaking script barriers, empowering every traveler in India through innovative 
             technology and inclusive design.
           </p>
         </div>
 
         {/* Mission Statement */}
-        <Card className="mb-12 shadow-card-hover">
-          <CardContent className="p-8 text-center">
-            <Heart className="h-12 w-12 mx-auto mb-4 text-primary" />
-            <h2 className="text-2xl font-bold text-foreground mb-4">Our Mission</h2>
-            <p className="text-lg text-muted-foreground max-w-4xl mx-auto">
+        <Card className="mb-8 md:mb-12 shadow-card-hover">
+          <CardContent className="p-6 md:p-8 text-center">
+            <Heart className="h-8 w-8 md:h-12 md:w-12 mx-auto mb-4 text-primary" />
+            <h2 className="text-xl md:text-2xl font-bold text-foreground mb-4">Our Mission</h2>
+            <p className="text-base md:text-lg text-muted-foreground max-w-4xl mx-auto">
               TransLIT was born from the vision of making India's incredible linguistic diversity 
               an asset rather than a barrier for travelers. We believe technology should bridge 
               cultural gaps, not create them. Our platform empowers every person to navigate 
@@ -109,15 +109,15 @@ const About = () => {
         </Card>
 
         {/* Stats */}
-        <div className="grid gap-6 md:grid-cols-4 mb-12">
+        <div className="grid gap-4 md:gap-6 grid-cols-2 md:grid-cols-4 mb-8 md:mb-12">
           {stats.map((stat, index) => {
             const Icon = stat.icon;
             return (
               <Card key={index} className="text-center hover:shadow-card-hover transition-smooth">
-                <CardContent className="p-6">
-                  <Icon className="h-8 w-8 mx-auto mb-3 text-primary" />
-                  <div className="text-2xl font-bold text-foreground mb-1">{stat.value}</div>
-                  <div className="text-sm text-muted-foreground">{stat.label}</div>
+                <CardContent className="p-4 md:p-6">
+                  <Icon className="h-6 w-6 md:h-8 md:w-8 mx-auto mb-2 md:mb-3 text-primary" />
+                  <div className="text-lg md:text-2xl font-bold text-foreground mb-1">{stat.value}</div>
+                  <div className="text-xs md:text-sm text-muted-foreground">{stat.label}</div>
                 </CardContent>
               </Card>
             );
@@ -125,18 +125,18 @@ const About = () => {
         </div>
 
         {/* Project Story */}
-        <div className="grid gap-8 lg:grid-cols-2 mb-12">
+        <div className="grid gap-6 md:gap-8 lg:grid-cols-2 mb-8 md:mb-12">
           <Card className="shadow-card-hover">
             <CardHeader>
-              <CardTitle>The Challenge</CardTitle>
+              <CardTitle className="text-lg md:text-xl">The Challenge</CardTitle>
             </CardHeader>
-            <CardContent>
-              <p className="text-muted-foreground mb-4">
+            <CardContent className="p-4 md:p-6">
+              <p className="text-sm md:text-base text-muted-foreground mb-4">
                 India is home to 22 official languages and hundreds of dialects, each with its 
                 own script and cultural significance. For travelers, this linguistic diversity 
                 can be overwhelming—from reading street signs to asking for directions.
               </p>
-              <p className="text-muted-foreground">
+              <p className="text-sm md:text-base text-muted-foreground">
                 Traditional translation apps focus on meaning but ignore the crucial aspect of 
                 pronunciation and script recognition that travelers desperately need in real-world situations.
               </p>
@@ -145,15 +145,15 @@ const About = () => {
 
           <Card className="shadow-card-hover">
             <CardHeader>
-              <CardTitle>Our Solution</CardTitle>
+              <CardTitle className="text-lg md:text-xl">Our Solution</CardTitle>
             </CardHeader>
-            <CardContent>
-              <p className="text-muted-foreground mb-4">
+            <CardContent className="p-4 md:p-6">
+              <p className="text-sm md:text-base text-muted-foreground mb-4">
                 TransLIT bridges this gap with real-time transliteration—converting text between 
                 scripts while preserving pronunciation. Whether you're reading a Tamil sign or 
                 writing Hindi in English letters, our AI-powered engine ensures accuracy.
               </p>
-              <p className="text-muted-foreground">
+              <p className="text-sm md:text-base text-muted-foreground">
                 Combined with offline capabilities and accessibility-first design, TransLIT 
                 works everywhere, for everyone, at any time.
               </p>
@@ -162,19 +162,19 @@ const About = () => {
         </div>
 
         {/* Team Section */}
-        <div className="mb-12">
-          <h2 className="text-2xl font-bold text-center text-foreground mb-8">Meet Our Team</h2>
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+        <div className="mb-8 md:mb-12">
+          <h2 className="text-xl md:text-2xl font-bold text-center text-foreground mb-6 md:mb-8">Meet Our Team</h2>
+          <div className="grid gap-4 md:gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {team.map((member, index) => (
               <Card key={index} className="text-center hover:shadow-card-hover transition-smooth">
-                <CardContent className="p-6">
-                  <div className="w-16 h-16 bg-gradient-hero rounded-full mx-auto mb-4 flex items-center justify-center text-white font-bold text-lg">
+                <CardContent className="p-4 md:p-6">
+                  <div className="w-12 h-12 md:w-16 md:h-16 bg-gradient-hero rounded-full mx-auto mb-3 md:mb-4 flex items-center justify-center text-white font-bold text-sm md:text-lg">
                     {member.name.split(' ').map(n => n[0]).join('')}
                   </div>
-                  <h3 className="font-semibold text-foreground mb-1">{member.name}</h3>
-                  <p className="text-sm text-primary font-medium mb-2">{member.role}</p>
-                  <p className="text-xs text-muted-foreground mb-3">{member.expertise}</p>
-                  <p className="text-xs text-muted-foreground">{member.description}</p>
+                  <h3 className="text-sm md:text-base font-semibold text-foreground mb-1">{member.name}</h3>
+                  <p className="text-xs md:text-sm text-primary font-medium mb-2">{member.role}</p>
+                  <p className="text-xs text-muted-foreground mb-2 md:mb-3">{member.expertise}</p>
+                  <p className="text-xs text-muted-foreground hidden md:block">{member.description}</p>
                 </CardContent>
               </Card>
             ))}
@@ -184,14 +184,14 @@ const About = () => {
         {/* Contact Form */}
         <Card className="shadow-card-hover">
           <CardHeader>
-            <CardTitle className="flex items-center space-x-2">
+            <CardTitle className="flex items-center space-x-2 text-lg md:text-xl">
               <Mail className="h-5 w-5" />
               <span>Get in Touch</span>
             </CardTitle>
           </CardHeader>
-          <CardContent>
+          <CardContent className="p-4 md:p-6">
             <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid gap-4 md:grid-cols-2">
+              <div className="grid gap-4 sm:grid-cols-2">
                 <div>
                   <label className="block text-sm font-medium mb-2">Name</label>
                   <Input
@@ -229,11 +229,11 @@ const About = () => {
               </div>
             </form>
 
-            <div className="mt-8 pt-6 border-t text-center">
-              <p className="text-muted-foreground mb-4">
+            <div className="mt-6 md:mt-8 pt-4 md:pt-6 border-t text-center">
+              <p className="text-sm md:text-base text-muted-foreground mb-4">
                 Join our mission to make India's linguistic diversity accessible to all travelers
               </p>
-              <div className="flex justify-center space-x-4">
+              <div className="flex flex-col sm:flex-row justify-center gap-2 sm:gap-4">
                 <Button variant="outline" size="sm">
                   Email: hello@translit.app
                 </Button>

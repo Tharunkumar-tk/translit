@@ -97,28 +97,28 @@ const CulturalMode = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-card py-8">
+    <div className="min-h-screen bg-gradient-card py-4 md:py-8">
       <div className="container mx-auto px-4 max-w-6xl">
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-foreground mb-4 lg:text-4xl">
+        <div className="text-center mb-6 md:mb-8">
+          <h1 className="text-2xl md:text-3xl font-bold text-foreground mb-4 lg:text-4xl">
             Cultural Context Mode
           </h1>
-          <p className="text-lg text-muted-foreground">
+          <p className="text-base md:text-lg text-muted-foreground px-4">
             Discover the cultural significance and meanings behind Indian scripts and terms
           </p>
         </div>
 
-        <div className="grid gap-8 lg:grid-cols-3">
+        <div className="grid gap-6 md:gap-8 xl:grid-cols-3">
           {/* Input Section */}
-          <div className="lg:col-span-1">
+          <div className="xl:col-span-1">
             <Card className="shadow-card-hover">
               <CardHeader>
-                <CardTitle className="flex items-center space-x-2">
+                <CardTitle className="flex items-center space-x-2 text-lg md:text-xl">
                   <MapPin className="h-5 w-5" />
                   <span>Cultural Context</span>
                 </CardTitle>
               </CardHeader>
-              <CardContent className="space-y-6">
+              <CardContent className="p-4 md:p-6 space-y-6">
                 <div>
                   <label className="block text-sm font-medium mb-2">Context Type</label>
                   <Select value={selectedRegion} onValueChange={setSelectedRegion}>
@@ -144,7 +144,7 @@ const CulturalMode = () => {
                     placeholder="Enter text in any script..."
                     value={inputText}
                     onChange={(e) => setInputText(e.target.value)}
-                    className="text-lg"
+                    className="text-base md:text-lg"
                   />
                 </div>
 
@@ -166,11 +166,13 @@ const CulturalMode = () => {
                         key={index}
                         variant="outline"
                         size="sm"
-                        className="w-full justify-start"
+                        className="w-full justify-start text-left h-auto py-2"
                         onClick={() => setInputText(item.term)}
                       >
-                        <span className="font-medium mr-2">{item.term}</span>
-                        <span className="text-muted-foreground">- {item.meaning}</span>
+                        <div className="flex flex-col items-start">
+                          <span className="font-medium">{item.term}</span>
+                          <span className="text-xs text-muted-foreground">{item.meaning}</span>
+                        </div>
                       </Button>
                     ))}
                   </div>
@@ -180,9 +182,9 @@ const CulturalMode = () => {
           </div>
 
           {/* Results Section */}
-          <div className="lg:col-span-2">
+          <div className="xl:col-span-2">
             <Tabs defaultValue="results" className="w-full">
-              <TabsList className="grid w-full grid-cols-2">
+              <TabsList className="grid w-full grid-cols-2 h-auto">
                 <TabsTrigger value="results">Cultural Results</TabsTrigger>
                 <TabsTrigger value="guide">Cultural Guide</TabsTrigger>
               </TabsList>
@@ -193,7 +195,7 @@ const CulturalMode = () => {
                     <Card key={index} className="shadow-card-hover">
                       <CardHeader>
                         <div className="flex items-center justify-between">
-                          <CardTitle className="text-xl">
+                          <CardTitle className="text-lg md:text-xl">
                             {result.original} → {result.transliterated}
                           </CardTitle>
                           <div className="flex items-center space-x-2">
@@ -208,18 +210,18 @@ const CulturalMode = () => {
                           </div>
                         </div>
                       </CardHeader>
-                      <CardContent className="space-y-4">
+                      <CardContent className="p-4 md:p-6 space-y-4">
                         <div>
                           <h4 className="font-medium text-primary mb-2">Meaning</h4>
-                          <p className="text-foreground">{result.meaning}</p>
+                          <p className="text-sm md:text-base text-foreground">{result.meaning}</p>
                         </div>
                         
                         <div>
                           <h4 className="font-medium text-accent mb-2">Cultural Significance</h4>
-                          <p className="text-muted-foreground">{result.cultural_note}</p>
+                          <p className="text-sm md:text-base text-muted-foreground">{result.cultural_note}</p>
                         </div>
                         
-                        <div className="grid gap-4 md:grid-cols-2">
+                        <div className="grid gap-4 sm:grid-cols-2">
                           <div>
                             <h4 className="font-medium mb-2">Pronunciation</h4>
                             <div className="flex items-center space-x-2">
@@ -246,10 +248,10 @@ const CulturalMode = () => {
                   ))
                 ) : (
                   <Card className="shadow-card-hover">
-                    <CardContent className="py-12 text-center">
-                      <Info className="h-12 w-12 mx-auto mb-4 text-muted-foreground" />
-                      <h3 className="text-lg font-medium mb-2">No Results Yet</h3>
-                      <p className="text-muted-foreground">
+                    <CardContent className="py-8 md:py-12 text-center">
+                      <Info className="h-8 w-8 md:h-12 md:w-12 mx-auto mb-4 text-muted-foreground" />
+                      <h3 className="text-base md:text-lg font-medium mb-2">No Results Yet</h3>
+                      <p className="text-sm md:text-base text-muted-foreground">
                         Enter a term or phrase to discover its cultural context and significance
                       </p>
                     </CardContent>
@@ -260,15 +262,15 @@ const CulturalMode = () => {
               <TabsContent value="guide" className="space-y-6">
                 <Card className="shadow-card-hover">
                   <CardHeader>
-                    <CardTitle>Cultural Context Guide</CardTitle>
+                    <CardTitle className="text-lg md:text-xl">Cultural Context Guide</CardTitle>
                   </CardHeader>
-                  <CardContent className="space-y-6">
+                  <CardContent className="p-4 md:p-6 space-y-6">
                     <div>
                       <h4 className="font-medium mb-3 flex items-center">
                         <span className="mr-2">🕉️</span>
                         Temple Architecture
                       </h4>
-                      <div className="grid gap-2 text-sm">
+                      <div className="grid gap-2 text-xs md:text-sm">
                         <p><strong>Garbhagriha:</strong> The innermost sanctum where the main deity resides</p>
                         <p><strong>Mandapa:</strong> Pillared hall for gatherings and ceremonies</p>
                         <p><strong>Shikhara:</strong> Tower or spire representing cosmic mountain</p>
@@ -281,7 +283,7 @@ const CulturalMode = () => {
                         <span className="mr-2">🎭</span>
                         Ritual Terms
                       </h4>
-                      <div className="grid gap-2 text-sm">
+                      <div className="grid gap-2 text-xs md:text-sm">
                         <p><strong>Darshan:</strong> Sacred viewing or audience with deity</p>
                         <p><strong>Aarti:</strong> Prayer ceremony with lamps and incense</p>
                         <p><strong>Prasad:</strong> Blessed food offering distributed to devotees</p>
@@ -294,7 +296,7 @@ const CulturalMode = () => {
                         <span className="mr-2">🏛️</span>
                         Heritage Terms
                       </h4>
-                      <div className="grid gap-2 text-sm">
+                      <div className="grid gap-2 text-xs md:text-sm">
                         <p><strong>Qila:</strong> Fort or fortified palace complex</p>
                         <p><strong>Mahal:</strong> Palace or grand residence</p>
                         <p><strong>Haveli:</strong> Traditional ornate mansion</p>
@@ -304,7 +306,7 @@ const CulturalMode = () => {
                     
                     <div className="bg-primary/5 p-4 rounded-lg border border-primary/20">
                       <h4 className="font-medium mb-2 text-primary">Cultural Sensitivity</h4>
-                      <p className="text-sm text-muted-foreground">
+                      <p className="text-xs md:text-sm text-muted-foreground">
                         Understanding these terms helps visitors show proper respect and appreciation 
                         for India's rich cultural heritage. Each term carries deep spiritual and 
                         historical significance beyond its literal translation.
