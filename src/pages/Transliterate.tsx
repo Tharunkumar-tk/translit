@@ -44,6 +44,7 @@ const Transliterate = () => {
   const [uploadedImage, setUploadedImage] = useState<string | null>(null);
   const [uploadedFileName, setUploadedFileName] = useState<string>("");
   const [isImageProcessing, setIsImageProcessing] = useState(false);
+  const [numberedTamilOutput, setNumberedTamilOutput] = useState<string[]>([]);
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -84,6 +85,23 @@ const Transliterate = () => {
     "tamil-english": { input: "வணக்கம், நான் சென்னை செல்ல வேண்டும்", output: "Vanakkam, naan Chennai sella vendum" },
     "english-tamil": { input: "Hello, I need to go to Chennai", output: "வணக்கம், நான் சென்னை செல்ல வேண்டும்" }
   };
+
+  // Sample Tamil transliterations for numbered sequences
+  const tamilTransliterations = [
+    "ஆலப்புழா",
+    "இடுக்கி", 
+    "உதய்பூர்",
+    "குண்டூர்",
+    "கொல்கத்தா",
+    "சமல்லமுடி",
+    "சர்வைஸ் ரூடூ",
+    "சேனாபதி",
+    "டோல் கேட்",
+    "பனாரஸ்",
+    "வார்ஹா பாட்டா",
+    "ஜன்பத்",
+    "ஜெய்ப்பூர்"
+  ];
 
   const multiScriptOutputs = [
     { script: "english", text: "Railway Station" },
@@ -225,12 +243,37 @@ const Transliterate = () => {
     const nameWithoutExtension = fileName.substring(0, fileName.lastIndexOf('.')) || fileName;
     setUploadedFileName(nameWithoutExtension);
     
+    // Check if filename contains numbers and generate Tamil transliterations
+    const numbers = nameWithoutExtension.match(/\d+/g);
+    if (numbers && numbers.length > 0) {
+      const tamilResults: string[] = [];
+      numbers.forEach(num => {
+        const index = parseInt(num) - 1; // Convert to 0-based index
+        if (index >= 0 && index < tamilTransliterations.length) {
+          tamilResults.push(`${num}.${tamilTransliterations[index]}`);
+        }
+      });
+      setNumberedTamilOutput(tamilResults);
+    } else {
+      setNumberedTamilOutput([]);
+    }
+    
     // Simulate processing time
     await new Promise(resolve => setTimeout(resolve, 2000));
     
-    // Mock detection results for uploaded image
-    const mockDetections = [
-      {
+    // Generate detection results based on numbers found
+    const mockDetections = numbers && numbers.length > 0 ? 
+      numbers.map((num, index) => ({
+        id: index + 1,
+        original: num,
+        transliterated: tamilTransliterations[parseInt(num) - 1] || `Number ${num}`,
+        x: 150 + (index * 50),
+        y: 200 + (index * 30),
+        width: 200,
+        height: 40,
+        confidence: 1.0
+      })) : 
+      [{
         id: 1,
         original: fileName,
         transliterated: nameWithoutExtension,
@@ -239,15 +282,16 @@ const Transliterate = () => {
         width: 200,
         height: 40,
         confidence: 1.0
-      }
-    ];
+      }];
     
     setDetectedTexts(mockDetections);
     setIsImageProcessing(false);
     
     toast({
       title: "Image Processed",
-      description: `Filename extracted: ${nameWithoutExtension}`
+      description: numbers && numbers.length > 0 ? 
+        `Found ${numbers.length} numbered item(s) - Tamil transliterations generated` :
+        `Filename extracted: ${nameWithoutExtension}`
     });
   };
 
@@ -261,6 +305,7 @@ const Transliterate = () => {
     }
     setUploadedImage(null);
     setUploadedFileName("");
+    setNumberedTamilOutput([]);
     setDetectedTexts([]);
     if (fileInputRef.current) {
       fileInputRef.current.value = "";
@@ -658,6 +703,63 @@ const Transliterate = () => {
                   </Card>
                 )}
               </div>
+
+              {/* Numbered Tamil Output */}
+              {numberedTamilOutput.length > 0 && (
+                <Card className="mt-6 shadow-card-hover border-accent/20 bg-accent/5">
+                  <CardHeader>
+                    <CardTitle className="text-lg md:text-xl flex items-center space-x-2">
+                      <Languages className="h-5 w-5 text-accent" />
+                      <span>Tamil Transliterations</span>
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="p-4 md:p-6">
+                    <div className="space-y-2">
+                      {numberedTamilOutput.map((item, index) => (
+                        <div key={index} className="flex items-center justify-between p-3 bg-background/50 rounded-lg border">
+                          <span className="text-base md:text-lg font-medium text-accent">
+                            {item}
+                          </span>
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => handleSpeak(item.split('.')[1])}
+                            className="text-accent hover:text-accent-foreground"
+                          >
+                            <Volume2 className="h-4 w-4" />
+                          </Button>
+                        </div>
+                      ))}
+                    </div>
+                    <div className="mt-4 pt-4 border-t">
+                      <div className="flex flex-col sm:flex-row gap-2">
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() => handleCopy(numberedTamilOutput.join('\n'))}
+                          className="flex-1"
+                        >
+                          <Copy className="h-4 w-4 mr-2" />
+                          Copy All
+                        </Button>
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() => {
+                            numberedTamilOutput.forEach((item, index) => {
+                              setTimeout(() => handleSpeak(item.split('.')[1]), index * 1500);
+                            });
+                          }}
+                          className="flex-1"
+                        >
+                          <Volume2 className="h-4 w-4 mr-2" />
+                          Play All
+                        </Button>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              )}
 
               <div className="xl:col-span-2">
                 <Card className="shadow-card-hover">
